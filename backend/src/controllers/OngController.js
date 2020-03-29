@@ -1,4 +1,4 @@
-const crypto = require('crypto')
+const generateId = require('../utils/generateId')
 const connection = require('../database/connection')
 
 module.exports = {
@@ -10,7 +10,9 @@ module.exports = {
   async create(require, response){
     //async pq pode demorar p registrar no banco
   const {name, email, whatsapp, city, uf} = require.body
-  const id = crypto.randomBytes(4).toString('HEX')
+
+  const id = generateId()
+
   await connection('ongs').insert({
     id,
     name,
